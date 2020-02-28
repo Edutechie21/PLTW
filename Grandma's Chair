@@ -1,0 +1,55 @@
+#pragma config(Sensor, dgtl1,  chairSwitch,         sensorTouch)
+#pragma config(Sensor, dgtl2,  bottomSwitch,        sensorTouch)
+#pragma config(Sensor, dgtl3,  topSwitch,           sensorTouch)
+#pragma config(Motor,  port2,           chairMotor,    tmotorNormal, openLoop)
+/*
+Project Title:Grandma's Chair
+Team Members: kathy and Liz
+Date:
+Section:
+
+
+Task Description:Build, wire and program a model to represent a chair for Grandma to ride up and down
+instead of walking the stairs. A Pushbutton switch is used for Grandma when she's ready to go up or down.
+Limit Switch Sensors are used to determine when the chair has arrived at that floor. One motor is needed
+to move the chair up and down.
+
+
+Pseudocode:
+loop forever
+if chair pushbutton pressed
+if bottom floor limit switch is pressed
+Chair moves up
+Top limit switch pressed
+Chair stops
+else if top floor limit switch is pressed
+Chair moves down
+Bottom limit switch pressed
+Chair stops
+
+*/
+
+task main()
+{                                     //Program begins, insert code within curly braces
+
+	while(1==1)
+	{
+		if(SensorValue[chairSwitch] == 1) //if chair switch is pressed
+
+		{
+			if(SensorValue[bottomSwitch] == 1)// if bottom limit switch is pressed
+			{
+				startMotor(chairMotor, -63); // chair goes down
+				untilTouch(topSwitch); //until bottom limit switch is pressed
+				stopMotor(chairMotor); // chair stops
+			}
+			else  // else if top limit switch is pressed
+			{
+				startMotor(chairMotor, 63); // chair goes down
+				untilTouch(bottomSwitch); //until bottom limit switch is pressed
+				stopMotor(chairMotor); // chair stops
+			}
+
+		}
+	}
+}
