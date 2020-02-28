@@ -1,0 +1,55 @@
+#pragma config(Sensor, in2,    pot,            sensorPotentiometer)
+#pragma config(Motor,  port1,           rightMotor,    tmotorVex393_HBridge, openLoop)
+#pragma config(Sensor, dgtl1,  buttonSwitch,        sensorTouch)
+/*
+Project Title: Tekrocks Bridge
+Team Members: Liz and Kathy
+Date:
+Section:
+
+
+Task Description:
+Model, wire and program a bridge that will allow trains to cross when closed, then it will
+rotate 90 degrees to allow boats to pass under the bridge.
+
+Pseudocode:
+run continuously
+when button is pushed
+turn on motor
+wait until the pot is greater than
+bridge stops
+push button
+wait until the pot is less than
+bridge stops
+turn off motor
+
+
+
+*/
+
+
+task main()
+{                                     //Program begins, insert code within curly braces
+
+
+	while(1 == 1)                         // run continuously
+	{
+		if(SensorValue[buttonSwitch] == 1)  // is push button pressed?
+		{
+			startMotor(rightMotor, -25);     //turn on motor
+
+			untilPotentiometerGreaterThan(2900, pot); //rotate until bridge has turned 90 degrees
+
+			stopMotor(rightMotor);     // stop motor
+
+			if(SensorValue[buttonSwitch] == 1)  // is push button pressed?
+			{
+				startMotor(rightMotor, 25);     //turn on motor
+
+				untilPotentiometerLessThan(2400, pot); // rotate until 180 degrees
+
+				stopMotor(rightMotor);     // stop motor
+			}
+		}
+	}
+}
